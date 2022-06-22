@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Holamundo.Controllers
 {
-    [ApiController]
+    [ApiController] //Controler que se encarga de tocas las peticiones a la ruta https://localhost:7051/WeatherForecast
+
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
@@ -17,7 +18,7 @@ namespace Holamundo.Controllers
         {
             _logger = logger;
         }
-
+        // Método GET, 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
