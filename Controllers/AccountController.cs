@@ -1,4 +1,5 @@
-﻿using Holamundo.Helpers;
+﻿using Holamundo.DataAccess;
+using Holamundo.Helpers;
 using Holamundo.Models.DataModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,12 @@ namespace Holamundo.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+         private readonly UniversityContext _context;
 
         private readonly JwtSettings _jwtSettings;
-        public AccountController(JwtSettings jwtSettings)
+        public AccountController(UniversityContext context, JwtSettings jwtSettings)
         {
-
+            _context = context;
             _jwtSettings = jwtSettings;
         }
 
@@ -48,6 +50,7 @@ namespace Holamundo.Controllers
             try
             {
                 var Token = new UserTokens();
+
                 var Valid = Logins.Any(user => user.Name.Equals(userLogins.UserName, StringComparison.OrdinalIgnoreCase));
 
                 if (Valid)

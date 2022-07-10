@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using Holamundo.Models.DataModels;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace Holamundo.Helpers
