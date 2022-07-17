@@ -28,7 +28,7 @@ namespace Holamundo.Controllers
             new User()
             {
                 Id = 1,
-                Email = "juanjo@holamundo.es",
+                EmailAddress = "juanjo@holamundo.es",
                 Name = "Admin",
                 Password = "Admin",
             },
@@ -36,7 +36,7 @@ namespace Holamundo.Controllers
             {
 
                 Id = 2,
-                Email = "juan@holamundo.es",
+                EmailAddress = "juan@holamundo.es",
                 Name = "User1",
                 Password = "Juan",
             }
@@ -51,17 +51,27 @@ namespace Holamundo.Controllers
             {
                 var Token = new UserTokens();
 
-                var Valid = Logins.Any(user => user.Name.Equals(userLogins.UserName, StringComparison.OrdinalIgnoreCase));
+                //TODO:
+                //Search a user in context with LINQ
+                var searchUser = (from user in _context.Users
+                                where user.Name == userLogins.UserName && user.Password == userLogins.Password
+                                select user).FirstOrDefault();
+                
+                Console.WriteLine("User Found", searchUser);
 
-                if (Valid)
+
+
+                //var Valid = Logins.Any(user => user.Name.Equals(userLogins.UserName, StringComparison.OrdinalIgnoreCase));
+
+                if (searchUser != null)
                 {
-                    var user = Logins.FirstOrDefault(user => user.Name.Equals(userLogins.UserName, StringComparison.OrdinalIgnoreCase));
+                    //var user = Logins.FirstOrDefault(user => user.Name.Equals(userLogins.UserName, StringComparison.OrdinalIgnoreCase));
 
                     Token = JwtHelpers.GetTokenKey(new UserTokens()
                     {
-                        UserName = user.Name,
-                        EmailId = user.Email,
-                        Id = user.Id,
+                        UserName = searchUser.Name,
+                        EmailId = searchUser.EmailAddress,
+                        Id = searchUser.Id,
                         GuidId = Guid.NewGuid(),
 
                     },_jwtSettings);

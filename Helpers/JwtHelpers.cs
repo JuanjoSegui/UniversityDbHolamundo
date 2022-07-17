@@ -43,7 +43,7 @@ namespace Holamundo.Helpers
             try
             {
 
-                var userToken = UserTokens();
+                var userToken = userToken();
                 if(model == null)
                 {
                     throw new ArgumentNullException(nameof(model));

@@ -25,6 +25,13 @@ namespace Holamundo.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles ="Administrator, User")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogTrace($"{nameof(WeatherForecastController)} - {nameof(Get)} - Trace Log Level");
+            _logger.LogDebug($"{nameof(WeatherForecastController)} - {nameof(Get)} - Debug log Level");
+            _logger.LogInformation($"{nameof(WeatherForecastController)} - {nameof(Get)} - Information Log Level");
+            _logger.LogWarning($"{nameof(WeatherForecastController)} - {nameof(Get)} - Warning Log Level");
+            _logger.LogError($"{nameof(WeatherForecastController)} - {nameof(Get)} - Error Log Level");
+            _logger.LogCritical($"{nameof(WeatherForecastController)} - {nameof(Get)} - Critical Log Level");
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

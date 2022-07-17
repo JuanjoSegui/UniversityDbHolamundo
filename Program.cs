@@ -6,7 +6,19 @@ using Holamundo.Services;
 using Holamundo;
 using Microsoft.OpenApi.Models;
 
+using Serilog;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Config Serilog
+builder.Host.UseSerilog((hostBuilderCtx, loggerConf) =>
+{
+    loggerConf
+    .WriteTo.Console()
+    .WriteTo.Debug()
+    .ReadFrom.Configuration(hostBuilderCtx.Configuration);
+});
 
 
 // Conexión con la base de datos
@@ -97,6 +109,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Tell app to use Serilog
+
+app.UseSerilogRequestLogging();
+
 
 app.UseHttpsRedirection();
 
