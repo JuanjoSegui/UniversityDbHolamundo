@@ -1,3 +1,3 @@
 # Proyecto API REST con .NET y SQL Server Express.
 
-Hecho en Visual Studio.
+Desarrollado en Visual Studio 2022.
